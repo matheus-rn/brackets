@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import * as _ from 'underscore';
 import axios from 'axios';
 import { handleNodes } from '../utils/bracket';
-import { Bracket } from 'react-tournament-bracket';
+import Bracket from '../components/Bracket';
 import BracketGame from '../components/BracketGame'
 
 export default function Home() {
@@ -11,7 +11,7 @@ export default function Home() {
   useEffect(() => {
     async function load(){
       try {
-        const { data } = await axios.get('https://api.stattrak.gg/esports/placements/league-of-legends-mid-invitational-2023-group-a/brackets');
+        const { data } = await axios.get('https://api.stattrak.gg/esports/placements/valorant-vcl-brazil-split-2-2023-playoffs/brackets');
 
         setData(handleNodes(data))
       } catch (error) {
