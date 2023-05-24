@@ -1,43 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import * as _ from 'underscore';
-import axios from 'axios';
-import { handleNodes } from '../utils/bracket';
-import Bracket from '../components/Bracket';
-import BracketGame from '../components/BracketGame'
+import React, { useEffect, useState } from "react";
+import * as _ from "underscore";
+import axios from "axios";
+import { handleNodes } from "../utils/bracket";
+import Bracket from "../components/Bracket";
+import BracketGame from "../components/BracketGame";
 
 export default function Home() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    async function load(){
+    async function load() {
       try {
-        const { data } = await axios.get('https://api.stattrak.gg/esports/placements/valorant-vcl-brazil-split-2-2023-playoffs/brackets');
+        const { data } = await axios.get(
+          "https://playbyplay.maisesports.com.br/placements/league-of-legends-mid-invitational-2023-playoffs/brackets"
+        );
 
-        setData(handleNodes(data))
+        setData(handleNodes(data));
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     }
 
-    load()
+    load();
   }, []);
 
   return (
     <>
-      <div style={{background: 'white'}}>
+      <div style={{ background: "white" }}>
         {data && (
-          <Bracket game={data} homeOnTop GameComponent={gameComponent}/>
+          <Bracket game={data} homeOnTop GameComponent={gameComponent} />
         )}
-      </div> 
+      </div>
     </>
-  )
+  );
 }
 
 const gameComponent = (props) => {
-  console.log('props', props)
-  return (
-    <BracketGame
-      {...props}
-    />
-  );
+  return <BracketGame {...props} />;
 };
